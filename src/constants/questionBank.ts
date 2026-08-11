@@ -1,0 +1,161 @@
+/**
+ * AI Question Bank — Comprehensive pool of chemistry questions
+ * for all 8 topics. The AI engine picks, shuffles, and varies
+ * these so students never see the same sequence twice.
+ */
+
+export interface AIQuestion {
+  id: string;
+  question: string;
+  answer: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  category: string;
+}
+
+export const AI_QUESTION_BANK: Record<string, AIQuestion[]> = {
+  "Atomic Structure": [
+    { id: "as-1", question: "What does the word 'atom' mean in Greek?", answer: "Indivisible (from 'atomos')", difficulty: "easy", category: "Basics" },
+    { id: "as-2", question: "What is the charge of a proton?", answer: "+1 (positive)", difficulty: "easy", category: "Sub-atomic Particles" },
+    { id: "as-3", question: "What is the approximate mass of an electron compared to a proton?", answer: "1/1836 of a proton's mass", difficulty: "medium", category: "Sub-atomic Particles" },
+    { id: "as-4", question: "Define Atomic Number (Z).", answer: "The number of protons in the nucleus of an atom. It determines the identity of the element.", difficulty: "easy", category: "Atomic Number" },
+    { id: "as-5", question: "What is Mass Number (A)?", answer: "The total number of protons and neutrons (nucleons) in an atom's nucleus. A = Z + N.", difficulty: "easy", category: "Mass Number" },
+    { id: "as-6", question: "State the formula for maximum electrons in a shell.", answer: "2n², where n is the shell number (K=1, L=2, M=3, N=4)", difficulty: "medium", category: "Bohr-Bury Rules" },
+    { id: "as-7", question: "How many electrons can the M shell (n=3) hold at maximum?", answer: "2(3)² = 18 electrons", difficulty: "medium", category: "Bohr-Bury Rules" },
+    { id: "as-8", question: "What is the maximum number of electrons allowed in the outermost shell?", answer: "8 electrons (Octet Rule)", difficulty: "medium", category: "Bohr-Bury Rules" },
+    { id: "as-9", question: "What are valence electrons?", answer: "The electrons present in the outermost shell of an atom that participate in chemical bonding.", difficulty: "easy", category: "Valency" },
+    { id: "as-10", question: "What is the valency of Sodium (Na, Z=11, config: 2,8,1)?", answer: "Valency = 1 (it loses 1 electron to achieve stable octet)", difficulty: "medium", category: "Valency" },
+    { id: "as-11", question: "Define Isotopes with an example.", answer: "Atoms of the same element with same atomic number but different mass numbers. E.g., C-12 (6p, 6n) and C-14 (6p, 8n).", difficulty: "medium", category: "Isotopes" },
+    { id: "as-12", question: "What are Isobars? Give an example.", answer: "Atoms of different elements with different atomic numbers but the same mass number. E.g., Ar-40 (Z=18) and Ca-40 (Z=20).", difficulty: "medium", category: "Isobars" },
+    { id: "as-13", question: "Which isotope of Carbon is used for radiocarbon dating?", answer: "Carbon-14 (C-14), which has a half-life of 5,730 years.", difficulty: "hard", category: "Isotopes" },
+    { id: "as-14", question: "What is the electron configuration of Chlorine (Z=17)?", answer: "2, 8, 7", difficulty: "easy", category: "Configuration" },
+    { id: "as-15", question: "Why is Chlorine highly reactive?", answer: "It has 7 valence electrons and needs only 1 more to complete its octet, making it eager to gain an electron.", difficulty: "hard", category: "Reactivity" },
+    { id: "as-16", question: "An element has 12 protons and 12 neutrons. What is its mass number and which element is it?", answer: "Mass number = 12 + 12 = 24. The element is Magnesium (Mg, Z=12).", difficulty: "hard", category: "Problem Solving" },
+    { id: "as-17", question: "What is the electron configuration of Calcium (Z=20)?", answer: "2, 8, 8, 2", difficulty: "easy", category: "Configuration" },
+    { id: "as-18", question: "Which medical isotope is used to treat goiter?", answer: "Iodine-131 (I-131)", difficulty: "hard", category: "Isotopes" },
+    { id: "as-19", question: "Where are protons and neutrons located inside an atom?", answer: "In the nucleus, at the center of the atom.", difficulty: "easy", category: "Basics" },
+    { id: "as-20", question: "What is the valency of Carbon (Z=6, config: 2,4)?", answer: "Valency = 4 (it shares 4 electrons to achieve stable configuration).", difficulty: "medium", category: "Valency" },
+  ],
+
+  "Mole Concept": [
+    { id: "mc-1", question: "What is a Mole in chemistry?", answer: "The amount of substance containing exactly 6.022 × 10²³ elementary entities (Avogadro's number).", difficulty: "easy", category: "Basics" },
+    { id: "mc-2", question: "What is the value of Avogadro's Number?", answer: "6.02214076 × 10²³ particles per mole", difficulty: "easy", category: "Constants" },
+    { id: "mc-3", question: "What is Molar Mass?", answer: "The mass of one mole of a substance in grams per mole (g/mol), numerically equal to its relative atomic/molecular mass.", difficulty: "easy", category: "Molar Mass" },
+    { id: "mc-4", question: "What is the molar mass of Water (H₂O)?", answer: "18 g/mol (H=1×2 + O=16 = 18)", difficulty: "medium", category: "Calculation" },
+    { id: "mc-5", question: "How many moles are in 44g of CO₂? (Molar mass of CO₂ = 44 g/mol)", answer: "n = mass/molar mass = 44/44 = 1 mole", difficulty: "medium", category: "Calculation" },
+    { id: "mc-6", question: "What volume does 1 mole of any gas occupy at STP?", answer: "22.4 liters (Molar Volume at Standard Temperature and Pressure)", difficulty: "medium", category: "Gas Laws" },
+    { id: "mc-7", question: "How many molecules are in 2 moles of water?", answer: "2 × 6.022 × 10²³ = 1.2044 × 10²⁴ molecules", difficulty: "medium", category: "Calculation" },
+    { id: "mc-8", question: "Convert: How many moles are in 3.011 × 10²³ atoms of Sodium?", answer: "n = particles / Avogadro's No. = 3.011 × 10²³ / 6.022 × 10²³ = 0.5 moles", difficulty: "hard", category: "Calculation" },
+    { id: "mc-9", question: "What is the mass of 0.5 moles of NaCl? (Molar mass = 58.5 g/mol)", answer: "Mass = moles × molar mass = 0.5 × 58.5 = 29.25 g", difficulty: "medium", category: "Calculation" },
+    { id: "mc-10", question: "What is the molar mass of Sulphuric Acid (H₂SO₄)?", answer: "98 g/mol (H=1×2 + S=32 + O=16×4 = 2+32+64 = 98)", difficulty: "hard", category: "Calculation" },
+    { id: "mc-11", question: "State the relationship: Moles to Number of Particles.", answer: "Number of Particles = Number of Moles × Avogadro's Number (Nₐ)", difficulty: "easy", category: "Formulas" },
+    { id: "mc-12", question: "State the relationship: Moles to Mass.", answer: "Number of Moles (n) = Given Mass (m) / Molar Mass (M)", difficulty: "easy", category: "Formulas" },
+    { id: "mc-13", question: "What does STP stand for and what are the conditions?", answer: "Standard Temperature and Pressure: 0°C (273.15 K) temperature and 1 atm (101.325 kPa) pressure.", difficulty: "medium", category: "Gas Laws" },
+    { id: "mc-14", question: "How many atoms of Oxygen are in 1 mole of CO₂?", answer: "2 × 6.022 × 10²³ = 1.2044 × 10²⁴ atoms (since each CO₂ has 2 oxygen atoms).", difficulty: "hard", category: "Calculation" },
+    { id: "mc-15", question: "If 1 mole of Carbon weighs 12g, what is the mass of a single Carbon atom?", answer: "12 / (6.022 × 10²³) = 1.99 × 10⁻²³ g", difficulty: "hard", category: "Calculation" },
+  ],
+
+  "Atomic Models": [
+    { id: "am-1", question: "Who proposed the Plum Pudding Model?", answer: "J.J. Thomson in 1904", difficulty: "easy", category: "Thomson" },
+    { id: "am-2", question: "Describe Thomson's Atomic Model.", answer: "An atom is a sphere of positive charge with electrons embedded in it like plums in a pudding. The overall charge is zero.", difficulty: "easy", category: "Thomson" },
+    { id: "am-3", question: "What experiment led Rutherford to discover the nucleus?", answer: "The Alpha Particle Scattering Experiment (Gold Foil Experiment), where alpha particles were shot at thin gold foil.", difficulty: "medium", category: "Rutherford" },
+    { id: "am-4", question: "What fraction of alpha particles bounced back in Rutherford's experiment?", answer: "About 1 in 12,000 alpha particles were deflected by more than 90° (bounced back).", difficulty: "hard", category: "Rutherford" },
+    { id: "am-5", question: "What did Rutherford conclude from most alpha particles passing straight through gold foil?", answer: "That most of the atom is empty space, with mass concentrated in a tiny, dense nucleus.", difficulty: "medium", category: "Rutherford" },
+    { id: "am-6", question: "What was the major drawback of Rutherford's model?", answer: "It could not explain atomic stability. Orbiting electrons should radiate energy continuously and spiral into the nucleus.", difficulty: "medium", category: "Rutherford" },
+    { id: "am-7", question: "Who proposed the Quantized Shell Model?", answer: "Niels Bohr in 1913", difficulty: "easy", category: "Bohr" },
+    { id: "am-8", question: "What is the key postulate of Bohr's model?", answer: "Electrons revolve in specific discrete energy levels (shells) and do not radiate energy while in a stable orbit.", difficulty: "medium", category: "Bohr" },
+    { id: "am-9", question: "What are the shell names in Bohr's model?", answer: "K (n=1), L (n=2), M (n=3), N (n=4) — named by letters or quantum number n.", difficulty: "easy", category: "Bohr" },
+    { id: "am-10", question: "When do electrons emit or absorb energy according to Bohr?", answer: "Only when they jump from one energy level (orbit) to another — absorbing energy to go higher, emitting to go lower.", difficulty: "hard", category: "Bohr" },
+    { id: "am-11", question: "Why was Thomson's model disproved?", answer: "Rutherford's alpha scattering experiment showed that positive charge is concentrated in a tiny nucleus, not spread uniformly.", difficulty: "medium", category: "Thomson" },
+    { id: "am-12", question: "What are 'orbitals' in quantum mechanics?", answer: "Probability clouds (s, p, d, f) around the nucleus where an electron is most likely to be found, replacing Bohr's fixed orbits.", difficulty: "hard", category: "Modern" },
+    { id: "am-13", question: "What are quarks?", answer: "Sub-nuclear particles that make up protons (2 up + 1 down quark) and neutrons (1 up + 2 down quarks).", difficulty: "hard", category: "Modern" },
+    { id: "am-14", question: "Arrange the atomic models chronologically.", answer: "Thomson (1904) → Rutherford (1911) → Bohr (1913) → Quantum Mechanical Model (1926+)", difficulty: "medium", category: "Timeline" },
+  ],
+
+  "Is Matter Around Us Pure?": [
+    { id: "mt-1", question: "What is a Pure Substance?", answer: "A substance made of only one type of particle with fixed composition and definite properties. E.g., Elements and Compounds.", difficulty: "easy", category: "Basics" },
+    { id: "mt-2", question: "What is a Mixture?", answer: "A material made by physically combining two or more substances in variable proportions.", difficulty: "easy", category: "Basics" },
+    { id: "mt-3", question: "Differentiate Homogeneous and Heterogeneous mixtures.", answer: "Homogeneous: uniform composition throughout (e.g., salt solution). Heterogeneous: non-uniform with visible boundaries (e.g., sand + salt).", difficulty: "medium", category: "Mixtures" },
+    { id: "mt-4", question: "What is a Solution?", answer: "A homogeneous mixture of two or more substances. The major component is the solvent, the minor is the solute.", difficulty: "easy", category: "Solutions" },
+    { id: "mt-5", question: "What is a Suspension?", answer: "A heterogeneous mixture where solute particles are large enough to be seen and settle down when left undisturbed. E.g., chalk in water.", difficulty: "medium", category: "Suspensions" },
+    { id: "mt-6", question: "What is the Tyndall Effect?", answer: "The scattering of a beam of light by colloidal particles, making the light path visible. E.g., sunlight through a dusty room.", difficulty: "medium", category: "Colloids" },
+    { id: "mt-7", question: "What is a Colloid? Give its particle size range.", answer: "A heterogeneous mixture with particle sizes between 1 nm and 1000 nm. Particles do not settle and show the Tyndall effect. E.g., milk, fog.", difficulty: "medium", category: "Colloids" },
+    { id: "mt-8", question: "How do you separate a mixture of salt and water?", answer: "By Evaporation — heating the solution so water evaporates, leaving salt crystals behind.", difficulty: "easy", category: "Separation" },
+    { id: "mt-9", question: "What separation technique uses differences in boiling points?", answer: "Distillation (or Fractional Distillation for liquids with close boiling points).", difficulty: "medium", category: "Separation" },
+    { id: "mt-10", question: "What is Chromatography used for?", answer: "Separating colored components of a mixture based on their different rates of adsorption/movement through a medium.", difficulty: "hard", category: "Separation" },
+    { id: "mt-11", question: "Define Element and Compound.", answer: "Element: A basic substance that cannot be broken down further (e.g., Iron, Gold). Compound: Two or more elements chemically combined in a fixed ratio (e.g., H₂O, CO₂).", difficulty: "easy", category: "Classification" },
+    { id: "mt-12", question: "Is air a homogeneous or heterogeneous mixture?", answer: "Homogeneous — it has a uniform composition of gases (N₂, O₂, CO₂, etc.) throughout.", difficulty: "easy", category: "Mixtures" },
+    { id: "mt-13", question: "What technique separates immiscible liquids like oil and water?", answer: "Separating funnel — the denser liquid is drained from the bottom, leaving the lighter one.", difficulty: "medium", category: "Separation" },
+    { id: "mt-14", question: "What is crystallization? Why is it preferred over evaporation?", answer: "Obtaining pure crystals of a solid from its solution by controlled cooling. Preferred because evaporation can decompose substances if heated too much.", difficulty: "hard", category: "Separation" },
+  ],
+
+  "Chemical Reactions & Equations": [
+    { id: "cr-1", question: "What is a Chemical Equation?", answer: "A symbolic representation of a chemical reaction using formulas of reactants and products with an arrow showing direction.", difficulty: "easy", category: "Basics" },
+    { id: "cr-2", question: "Why must a chemical equation be balanced?", answer: "To satisfy the Law of Conservation of Mass — atoms cannot be created or destroyed, so both sides must have equal atoms.", difficulty: "easy", category: "Balancing" },
+    { id: "cr-3", question: "What is a Combination Reaction? Give an example.", answer: "Two or more reactants combine to form a single product. E.g., 2Mg + O₂ → 2MgO", difficulty: "medium", category: "Types" },
+    { id: "cr-4", question: "What is a Decomposition Reaction?", answer: "A single reactant breaks down into two or more simpler products. E.g., 2H₂O → 2H₂ + O₂ (electrolysis)", difficulty: "medium", category: "Types" },
+    { id: "cr-5", question: "Name the three types of decomposition reactions.", answer: "Thermal decomposition (heat), Electrolytic decomposition (electricity), and Photolytic decomposition (light).", difficulty: "hard", category: "Types" },
+    { id: "cr-6", question: "Define Displacement Reaction with an example.", answer: "A more reactive element displaces a less reactive one from its compound. E.g., Fe + CuSO₄ → FeSO₄ + Cu", difficulty: "medium", category: "Types" },
+    { id: "cr-7", question: "What is a Double Displacement Reaction?", answer: "Two compounds exchange their ions to form two new compounds. E.g., Na₂SO₄ + BaCl₂ → BaSO₄↓ + 2NaCl", difficulty: "medium", category: "Types" },
+    { id: "cr-8", question: "What is Oxidation?", answer: "Gain of oxygen, or loss of hydrogen, or loss of electrons by a substance.", difficulty: "easy", category: "Redox" },
+    { id: "cr-9", question: "What is Reduction?", answer: "Loss of oxygen, or gain of hydrogen, or gain of electrons by a substance.", difficulty: "easy", category: "Redox" },
+    { id: "cr-10", question: "What mnemonic helps remember Oxidation and Reduction?", answer: "OIL RIG — Oxidation Is Loss (of electrons), Reduction Is Gain (of electrons).", difficulty: "easy", category: "Redox" },
+    { id: "cr-11", question: "Differentiate Exothermic and Endothermic reactions.", answer: "Exothermic: releases heat energy (products are at lower energy). Endothermic: absorbs heat energy (products are at higher energy).", difficulty: "medium", category: "Energy" },
+    { id: "cr-12", question: "Give an example of an Exothermic reaction.", answer: "Burning of coal: C + O₂ → CO₂ + Heat. Also: respiration, neutralization.", difficulty: "medium", category: "Energy" },
+    { id: "cr-13", question: "What is Rancidity?", answer: "The oxidation of fats and oils in food, causing unpleasant smell and taste over time.", difficulty: "medium", category: "Corrosion" },
+    { id: "cr-14", question: "What is Corrosion? Give an example.", answer: "The gradual degradation of metals by chemical reaction with the environment. E.g., rusting of iron (Fe₂O₃·xH₂O).", difficulty: "medium", category: "Corrosion" },
+    { id: "cr-15", question: "Balance this equation: Fe + H₂O → Fe₃O₄ + H₂", answer: "3Fe + 4H₂O → Fe₃O₄ + 4H₂", difficulty: "hard", category: "Balancing" },
+  ],
+
+  "Acids, Bases & Salts": [
+    { id: "ab-1", question: "What defines an Acid?", answer: "A substance that produces H⁺ (hydrogen/hydronium) ions in aqueous solution, tastes sour, and turns blue litmus red.", difficulty: "easy", category: "Acids" },
+    { id: "ab-2", question: "What defines a Base?", answer: "A substance that produces OH⁻ (hydroxide) ions in aqueous solution, tastes bitter, feels soapy, and turns red litmus blue.", difficulty: "easy", category: "Bases" },
+    { id: "ab-3", question: "What is pH Scale?", answer: "A logarithmic scale from 0 to 14 measuring H⁺ ion concentration. pH 7 = neutral, <7 = acidic, >7 = basic.", difficulty: "medium", category: "pH" },
+    { id: "ab-4", question: "What does pH stand for?", answer: "'Potenz des Wasserstoffs' (German) or 'Potential of Hydrogen'.", difficulty: "medium", category: "pH" },
+    { id: "ab-5", question: "What happens during a Neutralization reaction?", answer: "Acid + Base → Salt + Water. E.g., HCl + NaOH → NaCl + H₂O", difficulty: "easy", category: "Neutralization" },
+    { id: "ab-6", question: "Give examples of Strong and Weak Acids.", answer: "Strong: HCl, H₂SO₄, HNO₃ (fully ionize). Weak: CH₃COOH (acetic acid), H₂CO₃ (partially ionize).", difficulty: "medium", category: "Acids" },
+    { id: "ab-7", question: "What is an Alkali?", answer: "A base that is soluble in water. E.g., NaOH (sodium hydroxide), KOH (potassium hydroxide).", difficulty: "easy", category: "Bases" },
+    { id: "ab-8", question: "What is Water of Crystallization?", answer: "The fixed number of water molecules present in a formula unit of a salt crystal. E.g., CuSO₄·5H₂O (copper sulphate pentahydrate).", difficulty: "hard", category: "Salts" },
+    { id: "ab-9", question: "What happens when an acid reacts with a metal?", answer: "Metal + Acid → Salt + Hydrogen gas (H₂). E.g., Zn + H₂SO₄ → ZnSO₄ + H₂↑", difficulty: "medium", category: "Reactions" },
+    { id: "ab-10", question: "What is an Indicator? Name two.", answer: "A substance that changes color depending on whether a solution is acidic or basic. E.g., Litmus, Phenolphthalein.", difficulty: "easy", category: "Indicators" },
+    { id: "ab-11", question: "What color does Phenolphthalein turn in a basic solution?", answer: "Pink/Magenta (it is colorless in acidic solution).", difficulty: "medium", category: "Indicators" },
+    { id: "ab-12", question: "What is the pH of human blood?", answer: "Between 7.35 and 7.45 (slightly basic).", difficulty: "hard", category: "pH" },
+    { id: "ab-13", question: "What is Baking Soda? Give its chemical name and formula.", answer: "Sodium Hydrogen Carbonate (Sodium Bicarbonate), NaHCO₃.", difficulty: "medium", category: "Salts" },
+    { id: "ab-14", question: "What is Washing Soda? Give its formula.", answer: "Sodium Carbonate Decahydrate, Na₂CO₃·10H₂O.", difficulty: "hard", category: "Salts" },
+    { id: "ab-15", question: "Why is Plaster of Paris called so?", answer: "It was originally found in large deposits near Paris, France. Formula: CaSO₄·½H₂O.", difficulty: "hard", category: "Salts" },
+  ],
+
+  "Metals & Non-Metals": [
+    { id: "mn-1", question: "What is Malleability?", answer: "The property of metals to be beaten into thin sheets. E.g., Gold can be hammered into extremely thin foils.", difficulty: "easy", category: "Physical Properties" },
+    { id: "mn-2", question: "What is Ductility?", answer: "The property of metals to be drawn into thin wires. E.g., Copper and Silver are highly ductile.", difficulty: "easy", category: "Physical Properties" },
+    { id: "mn-3", question: "What are Sonorous materials?", answer: "Materials that produce a ringing sound when struck. Metals are generally sonorous; non-metals are not.", difficulty: "easy", category: "Physical Properties" },
+    { id: "mn-4", question: "Which non-metal is a good conductor of electricity?", answer: "Graphite (an allotrope of Carbon) — it has free electrons in its layered structure.", difficulty: "medium", category: "Exceptions" },
+    { id: "mn-5", question: "What is an Ionic Bond?", answer: "A chemical bond formed by the transfer of electrons from a metal to a non-metal, resulting in electrostatic attraction between oppositely charged ions.", difficulty: "medium", category: "Bonding" },
+    { id: "mn-6", question: "List 3 properties of Ionic Compounds.", answer: "1) High melting/boiling points, 2) Soluble in water, 3) Conduct electricity when molten or in aqueous solution.", difficulty: "medium", category: "Bonding" },
+    { id: "mn-7", question: "What is an Amphoteric Oxide?", answer: "An oxide that reacts with both acids and bases to form salt and water. E.g., Al₂O₃, ZnO.", difficulty: "hard", category: "Oxides" },
+    { id: "mn-8", question: "What is Roasting?", answer: "Heating a sulphide ore in the presence of excess air to convert it to its metal oxide. Releases SO₂.", difficulty: "medium", category: "Metallurgy" },
+    { id: "mn-9", question: "What is Calcination?", answer: "Heating a carbonate ore strongly in limited or no air to convert it to metal oxide. Releases CO₂.", difficulty: "medium", category: "Metallurgy" },
+    { id: "mn-10", question: "What is the Reactivity Series?", answer: "An arrangement of metals in decreasing order of reactivity: K > Na > Ca > Mg > Al > Zn > Fe > Pb > H > Cu > Hg > Ag > Au.", difficulty: "hard", category: "Reactivity" },
+    { id: "mn-11", question: "Why is Gold found in a free (native) state in nature?", answer: "Because Gold is the least reactive metal and does not react with oxygen, water, or acids under normal conditions.", difficulty: "medium", category: "Reactivity" },
+    { id: "mn-12", question: "What is an Alloy? Give an example.", answer: "A homogeneous mixture of a metal with other metals or non-metals. E.g., Brass (Cu + Zn), Steel (Fe + C).", difficulty: "medium", category: "Alloys" },
+    { id: "mn-13", question: "Why does Copper turn green when exposed to moist air?", answer: "It forms a layer of Copper Carbonate [CuCO₃·Cu(OH)₂] due to reaction with CO₂ and moisture.", difficulty: "hard", category: "Corrosion" },
+    { id: "mn-14", question: "Which metal is stored under kerosene and why?", answer: "Sodium (Na) — because it is highly reactive and reacts vigorously with air and water.", difficulty: "medium", category: "Reactivity" },
+  ],
+
+  "Carbon & Its Compounds": [
+    { id: "cc-1", question: "Why is Carbon called Tetravalent?", answer: "Carbon has 4 valence electrons (Z=6, config 2,4) and forms 4 covalent bonds to achieve a stable octet.", difficulty: "easy", category: "Carbon Basics" },
+    { id: "cc-2", question: "What is Catenation?", answer: "The unique ability of carbon atoms to bond with other carbon atoms forming long chains, branched chains, or rings.", difficulty: "easy", category: "Carbon Basics" },
+    { id: "cc-3", question: "Differentiate Saturated and Unsaturated Hydrocarbons.", answer: "Saturated: single C-C bonds only (Alkanes). Unsaturated: contain double (Alkenes) or triple (Alkynes) C-C bonds.", difficulty: "medium", category: "Hydrocarbons" },
+    { id: "cc-4", question: "What is the general formula for Alkanes?", answer: "CₙH₂ₙ₊₂ (e.g., Methane CH₄, Ethane C₂H₆)", difficulty: "easy", category: "Formulas" },
+    { id: "cc-5", question: "What is the general formula for Alkenes?", answer: "CₙH₂ₙ (e.g., Ethene C₂H₄, Propene C₃H₆)", difficulty: "easy", category: "Formulas" },
+    { id: "cc-6", question: "What is the general formula for Alkynes?", answer: "CₙH₂ₙ₋₂ (e.g., Ethyne C₂H₂, Propyne C₃H₄)", difficulty: "medium", category: "Formulas" },
+    { id: "cc-7", question: "What is a Homologous Series?", answer: "A series of organic compounds with the same functional group, similar chemical properties, and successive members differing by -CH₂- (14 mass units).", difficulty: "medium", category: "Series" },
+    { id: "cc-8", question: "What is a Functional Group? Give examples.", answer: "An atom or group of atoms that determines the chemical properties of a compound. E.g., -OH (alcohol), -COOH (carboxylic acid), -CHO (aldehyde).", difficulty: "medium", category: "Functional Groups" },
+    { id: "cc-9", question: "What is the difference between Diamond and Graphite?", answer: "Diamond: 3D tetrahedral network, extremely hard, insulator. Graphite: layered planar structure, soft, conductor of electricity.", difficulty: "medium", category: "Allotropes" },
+    { id: "cc-10", question: "What is an Addition Reaction?", answer: "Unsaturated hydrocarbons add atoms across the double/triple bond to become saturated. E.g., CH₂=CH₂ + H₂ → CH₃-CH₃", difficulty: "hard", category: "Reactions" },
+    { id: "cc-11", question: "What is a Substitution Reaction in organic chemistry?", answer: "An atom or group in a saturated compound is replaced by another. E.g., CH₄ + Cl₂ → CH₃Cl + HCl (in sunlight).", difficulty: "hard", category: "Reactions" },
+    { id: "cc-12", question: "Name the simplest Alkane, Alkene, and Alkyne.", answer: "Alkane: Methane (CH₄). Alkene: Ethene (C₂H₄). Alkyne: Ethyne/Acetylene (C₂H₂).", difficulty: "easy", category: "Naming" },
+    { id: "cc-13", question: "What is Ethanol? Give its formula and one use.", answer: "C₂H₅OH (Ethyl Alcohol). Used as a solvent, in alcoholic beverages, and as a fuel additive.", difficulty: "medium", category: "Compounds" },
+    { id: "cc-14", question: "What is Saponification?", answer: "The reaction of a fat/oil with a base (like NaOH) to produce soap (sodium salt of fatty acid) and glycerol.", difficulty: "hard", category: "Reactions" },
+    { id: "cc-15", question: "What is a Micelle?", answer: "A spherical cluster formed by soap molecules in water, with hydrophobic tails inward (trapping grease) and hydrophilic heads outward.", difficulty: "hard", category: "Compounds" },
+  ],
+};
