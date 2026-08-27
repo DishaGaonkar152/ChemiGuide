@@ -201,7 +201,7 @@ export default function AIChatBot() {
     setIsLoading(true);
 
     try {
-      const reply = await sendChatMessage(msgText, currentImg || undefined);
+      const reply = await sendChatMessage(msgText, currentImg || undefined, messages);
       const botMsg: ChatMessage = { role: 'model', text: reply };
       setMessages(prev => [...prev, botMsg]);
     } catch {

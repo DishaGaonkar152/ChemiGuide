@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(15, 15, 15, 0.75)', // Glassmorphism dark background
     borderWidth: 1.5,
     borderRadius: 16,
-    padding: 24,
+    padding: 28,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.9,
     shadowRadius: 20,

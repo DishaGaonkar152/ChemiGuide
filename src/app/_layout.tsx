@@ -1,17 +1,19 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import React, { useState } from 'react';
 import SplashIntro from '../components/SplashIntro';
 import FloatingAssistant from '../components/FloatingAssistant';
 import AIChatBot from '../components/AIChatBot';
+import { ThemeProvider, useAppTheme } from '../context/ThemeContext';
 
-export default function Layout() {
+function RootLayoutNav() {
   const [showSplash, setShowSplash] = useState(true);
+  const { theme } = useAppTheme();
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
+      <StatusBar style={theme === 'dark' ? "light" : "dark"} />
       <Stack
         screenOptions={{
           headerStyle: {
@@ -38,6 +40,8 @@ export default function Layout() {
         <Stack.Screen name="class10/acids-bases" options={{ title: 'Acids, Bases & Salts' }} />
         <Stack.Screen name="class10/metals" options={{ title: 'Metals & Non-Metals' }} />
         <Stack.Screen name="class10/carbon" options={{ title: 'Carbon Compounds' }} />
+        <Stack.Screen name="class9/chemical-formulas" options={{ title: 'Chemical Formulas' }} />
+        <Stack.Screen name="class10/periodic-table" options={{ title: 'Periodic Table' }} />
       </Stack>
 
       {/* Splash overlay — renders on top of everything, removes itself when done */}
@@ -49,6 +53,14 @@ export default function Layout() {
       {/* Global Realtime AI Chatbot (Top Right) */}
       <AIChatBot />
     </View>
+  );
+}
+
+export default function Layout() {
+  return (
+    <ThemeProvider>
+      <RootLayoutNav />
+    </ThemeProvider>
   );
 }
 

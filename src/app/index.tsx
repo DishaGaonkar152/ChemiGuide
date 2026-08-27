@@ -7,7 +7,9 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Switch,
 } from "react-native";
+import { useAppTheme } from '../context/ThemeContext';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -242,8 +244,21 @@ function BoredButton() {
 // MAIN HOME SCREEN
 // ═══════════════════════════════════════
 export default function Home() {
+  const { theme, toggleTheme } = useAppTheme();
+
   return (
     <View style={styles.container}>
+      {/* ─── THEME TOGGLE (Top Right) ─── */}
+      <View style={{ position: 'absolute', top: 50, right: 20, zIndex: 100, flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)', padding: 8, borderRadius: 20 }}>
+        <Text style={{ fontSize: 16, marginRight: 8 }}>{theme === 'dark' ? '🌙' : '☀️'}</Text>
+        <Switch 
+          value={theme === 'light'} 
+          onValueChange={toggleTheme} 
+          trackColor={{ false: '#767577', true: '#00ffff' }}
+          thumbColor={theme === 'light' ? '#fff' : '#f4f3f4'}
+        />
+      </View>
+
       <ScrollView
         style={styles.scrollContainer}
         contentContainerStyle={styles.content}

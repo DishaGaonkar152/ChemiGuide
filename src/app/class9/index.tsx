@@ -12,6 +12,12 @@ const TOPICS = [
     href: '/class9/atomic-structure'
   },
   {
+    title: '📝 Chemical Formulas',
+    description: 'Master the Criss-Cross method and learn to write and name chemical compounds like a pro.',
+    color: '#00ff88',
+    href: '/class9/chemical-formulas'
+  },
+  {
     title: '🔢 Mole Concept Basics',
     description: "Your first exposure to chemistry math! Learn about Avogadro's number and molar mass.",
     color: '#ff00ff',
@@ -135,10 +141,9 @@ const styles = StyleSheet.create({
   },
   topicsSection: {
     width: '100%',
-    maxWidth: 800,
-    paddingHorizontal: 20,
+    paddingHorizontal: 6,
   },
   cardWrapper: {
-    marginBottom: 12,
+    marginBottom: 16,
   }
 });

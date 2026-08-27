@@ -25,9 +25,15 @@ const TOPICS = [
   },
   {
     title: '💎 Carbon & Its Compounds',
-    description: 'Dive into organic chemistry, covalent bonds, and the versatile nature of carbon.',
+    description: 'Explore the versatile nature of carbon, covalent bonds, allotropes, and organic nomenclature.',
     color: '#ffff00',
     href: '/class10/carbon'
+  },
+  {
+    title: '📊 Periodic Table & Trends',
+    description: 'Understand Mendeleev, modern classification, and the trends of atomic size and valency.',
+    color: '#ffaa00',
+    href: '/class10/periodic-table'
   }
 ];
 

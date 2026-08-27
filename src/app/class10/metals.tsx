@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity, Linking } from 'react-native';
 import DetailScreenLayout, { styles } from '../../components/DetailScreenLayout';
 import InlineAtomModel from '../../components/InlineAtomModel';
 
@@ -7,11 +7,17 @@ export default function MetalsScreen() {
   return (
     <DetailScreenLayout title="Metals & Non-Metals" color="#00ff00" emoji="⛏">
       <Text style={styles.heading}>1. Introduction to Metals and Non-Metals</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=pdfFniIlz-I')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Metals & Non-Metals Introduction</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         The elements found in nature can be broadly classified into <Text style={styles.highlight}>metals</Text> and <Text style={styles.highlight}>non-metals</Text> based on their physical and chemical properties. In the Earth's crust, metals like aluminum and iron are abundant. Oxygen and silicon, which are non-metals and metalloids respectively, make up a large portion as well.
       </Text>
       
       <Text style={styles.heading}>2. Physical Properties of Metals</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=9pPo-GH7DGk')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Physical Properties of Metals</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         Metals exhibit several characteristic physical properties that make them useful in everyday life:
       </Text>
@@ -36,6 +42,9 @@ export default function MetalsScreen() {
       </View>
 
       <Text style={styles.heading}>3. Physical Properties of Non-Metals</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=aVvzWpqOuN4')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Physical Properties of Non-Metals</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         Non-metals (e.g., Carbon, Sulphur, Iodine, Oxygen, Hydrogen) possess properties mostly opposite to those of metals:
       </Text>
@@ -56,13 +65,18 @@ export default function MetalsScreen() {
       </View>
 
       <Text style={styles.heading}>4. Atomic Structure of a Metal</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=VI9sFJG3AQs')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Atomic Structure of Metals</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         Metals tend to have 1, 2, or 3 electrons in their outermost shell, which they can easily lose to form positive ions (cations). Below is the 3D model of a Sodium atom (Na) with 11 electrons, showing its single valence electron.
       </Text>
       <InlineAtomModel atomicNumber={11} elementName="Sodium" elementSymbol="Na" color="#ff4444" caption="Sodium (Z=11): 2,8,1 — metals have few valence electrons, easily lost to form cations" />
 
       <Text style={styles.heading}>5. Chemical Properties of Metals</Text>
-      
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=OG1BPBA1lZU')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Chemical Properties of Metals</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}><Text style={styles.highlight}>a) Reaction with Oxygen:</Text> Almost all metals combine with oxygen to form metal oxides (Metal + Oxygen → Metal oxide). Metal oxides are generally basic in nature. However, some oxides like Aluminum oxide (Al2O3) and Zinc oxide (ZnO) show both acidic and basic behavior and are known as <Text style={styles.highlight}>amphoteric oxides</Text>.</Text>
       <Text style={styles.bulletPoint}>• Sodium and Potassium react so vigorously that they catch fire if kept in the open. They are kept immersed in kerosene oil.</Text>
       <Text style={styles.bulletPoint}>• Magnesium burns with a dazzling white flame.</Text>
@@ -81,8 +95,24 @@ export default function MetalsScreen() {
       <Text style={styles.bulletPoint}>• Exceptions: Copper, Silver, and Gold do not react with dilute acids.</Text>
 
       <Text style={styles.paragraph}><Text style={styles.highlight}>d) Reaction with Solutions of other Metal Salts:</Text> A more reactive metal can displace a less reactive metal from its compound in a solution. (Metal A + Salt solution of B → Salt solution of A + Metal B).</Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.highlight}>Amphoteric Oxides (NCERT):</Text> Some metal oxides like Al₂O₃ and ZnO react with both acids and bases, making them amphoteric:
+      </Text>
+      <Text style={styles.bulletPoint}>• Al₂O₃ + 6HCl → 2AlCl₃ + 3H₂O (reacts with acid)</Text>
+      <Text style={styles.bulletPoint}>• Al₂O₃ + 2NaOH → 2NaAlO₂ (Sodium Aluminate) + H₂O (reacts with base)</Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.highlight}>Reaction with Nitric Acid (NCERT):</Text> Metals do NOT evolve H₂ gas with HNO₃ because it is a strong oxidizing agent — it oxidizes H₂ to water and itself gets reduced to NO₂, NO, or N₂O. Exception: Mg and Mn react with very dilute HNO₃ to evolve H₂.
+      </Text>
+      <View style={styles.infoBox}>
+        <Text style={styles.infoBoxText}>
+          Aqua Regia (Royal Water): A freshly prepared mixture of concentrated HCl and concentrated HNO₃ in the ratio 3:1. It is one of the few reagents that can dissolve Gold (Au) and Platinum (Pt), the two least reactive metals!
+        </Text>
+      </View>
 
       <Text style={styles.heading}>6. The Reactivity Series</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=G5chzftiL30')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: The Reactivity Series</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         The reactivity series is a list of metals arranged in the order of their decreasing activities.
       </Text>
@@ -98,12 +128,18 @@ export default function MetalsScreen() {
       </Text>
 
       <Text style={styles.heading}>7. Atomic Structure of a Non-Metal</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=PaGJwOQb6Lc')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Atomic Structure of Non-Metals</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         Non-metals usually have 5, 6, or 7 valence electrons and tend to gain electrons to achieve a stable octet. Below is Chlorine (17 electrons), needing just one more to complete its shell.
       </Text>
       <InlineAtomModel atomicNumber={17} elementName="Chlorine" elementSymbol="Cl" color="#ffff00" caption="Chlorine (Z=17): 2,8,7 — non-metals gain electrons to achieve a stable octet" />
 
       <Text style={styles.heading}>8. Ionic Bonding</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=gVuxPMFG5kY')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Ionic Bonding Explained</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         When a metal reacts with a non-metal, the metal loses electrons and the non-metal gains them. The resulting positively and negatively charged ions attract each other with strong electrostatic forces, forming an <Text style={styles.highlight}>ionic bond</Text>.
       </Text>
@@ -120,6 +156,9 @@ export default function MetalsScreen() {
       </View>
 
       <Text style={styles.heading}>9. Occurrence of Metals</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=bKmZ8ePrIOM')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Occurrence of Metals</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         Metals at the bottom of the reactivity series are least reactive and often found in a <Text style={styles.highlight}>free (native) state</Text> (e.g., Gold, Silver, Platinum). Most other metals are found in the Earth's crust in a <Text style={styles.highlight}>combined state</Text> as oxides, sulphides, or carbonates.
       </Text>
@@ -128,22 +167,50 @@ export default function MetalsScreen() {
       <Text style={styles.bulletPoint}>• Gangue: Earthy impurities like sand, soil, etc., present in the ore.</Text>
 
       <Text style={styles.heading}>10. Extraction of Metals</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=kcNXiZBxsJE')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Extraction of Metals</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         The process of extracting a metal from its ore depends on its position in the reactivity series:
       </Text>
       <Text style={styles.bulletPoint}>• <Text style={styles.highlight}>Low Reactivity</Text>: Ores of these metals (e.g., Cinnabar - HgS) are reduced to metals by heating alone (Roasting).</Text>
       <Text style={styles.bulletPoint}>• <Text style={styles.highlight}>Medium Reactivity</Text>: (Zn, Fe, Pb) occur mainly as sulphides or carbonates. Sulphide ores are heated in excess air (<Text style={styles.highlight}>Roasting</Text>). Carbonate ores are heated in limited air (<Text style={styles.highlight}>Calcination</Text>). The resulting metal oxides are then reduced to metals using carbon.</Text>
       <Text style={styles.bulletPoint}>• <Text style={styles.highlight}>High Reactivity</Text>: (Na, K, Ca, Al) cannot be reduced by carbon. They are obtained by <Text style={styles.highlight}>electrolytic reduction</Text> of their molten chlorides or oxides.</Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.highlight}>Thermite Reaction (NCERT):</Text> When highly reactive metals like aluminium are used to reduce metal oxides of less reactive metals like iron, an enormous amount of heat is produced. This reaction is known as the Thermite Reaction and is used for joining railway tracks and cracked machine parts:
+      </Text>
+      <Text style={styles.bulletPoint}>• Fe₂O₃(s) + 2Al(s) → 2Fe(l) + Al₂O₃(s) + Heat</Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.highlight}>Key Extraction Equations (NCERT):</Text>
+      </Text>
+      <Text style={styles.bulletPoint}>• Roasting (Cinnabar): 2HgS + 3O₂ →(heat) 2HgO + 2SO₂, then 2HgO →(heat) 2Hg + O₂</Text>
+      <Text style={styles.bulletPoint}>• Roasting (Zinc blende): 2ZnS + 3O₂ →(heat) 2ZnO + 2SO₂</Text>
+      <Text style={styles.bulletPoint}>• Calcination: ZnCO₃ →(heat) ZnO + CO₂</Text>
+      <Text style={styles.bulletPoint}>• Carbon Reduction: ZnO + C → Zn + CO</Text>
 
       <Text style={styles.heading}>11. Refining of Metals</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=D4zcGn1RHF0')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Refining of Metals</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         Metals produced by reduction processes are not very pure. The most common method to obtain pure metal is <Text style={styles.highlight}>electrolytic refining</Text>.
       </Text>
       <Text style={styles.paragraph}>
         In this process, a thick block of impure metal acts as the <Text style={styles.highlight}>anode</Text> and a thin strip of pure metal acts as the <Text style={styles.highlight}>cathode</Text>. A solution of the metal salt is used as an electrolyte. On passing electric current, pure metal from the anode dissolves into the electrolyte, and an equivalent amount of pure metal from the electrolyte deposits onto the cathode. The insoluble impurities settle at the bottom (anode mud).
       </Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.highlight}>Electrolytic Refining Reactions (NCERT):</Text> During electrolytic refining of copper:
+      </Text>
+      <Text style={styles.bulletPoint}>• At Anode (impure Cu dissolves): Cu(s) → Cu²⁺(aq) + 2e⁻</Text>
+      <Text style={styles.bulletPoint}>• At Cathode (pure Cu deposits): Cu²⁺(aq) + 2e⁻ → Cu(s)</Text>
+      <Text style={styles.paragraph}>
+        The soluble impurities pass into the solution, while insoluble impurities like <Text style={styles.highlight}>Gold, Silver, and Platinum</Text> settle at the bottom as <Text style={styles.highlight}>anode mud</Text> — which is very valuable!
+      </Text>
 
       <Text style={styles.heading}>12. Corrosion</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=MnN1atGYGlk')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Corrosion Explained</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         The gradual eating away of metals by the action of air, moisture, or a chemical on their surface is called <Text style={styles.highlight}>corrosion</Text>. Iron rusts when exposed to both air and moisture, forming a flaky brown substance. Silver tarnishes by reacting with sulphur in the air, and copper forms a green coating of basic copper carbonate.
       </Text>
@@ -157,8 +224,16 @@ export default function MetalsScreen() {
           - Alloying: Mixing the metal with other elements to change its properties.
         </Text>
       </View>
+      <View style={styles.infoBox}>
+        <Text style={styles.infoBoxText}>
+          NCERT Activity 3.14 — Three Test Tubes Experiment:{"\n\n"}• Test Tube A: Iron nails in water open to air → Nails RUST (both air and water present){"\n"}• Test Tube B: Iron nails in boiled distilled water sealed with oil → No Rust (air excluded){"\n"}• Test Tube C: Iron nails in dry air with anhydrous CaCl₂ (desiccant) → No Rust (moisture excluded){"\n\n"}Conclusion: Both air (oxygen) and moisture (water) are essential for rusting to occur.
+        </Text>
+      </View>
 
       <Text style={styles.heading}>13. Alloys</Text>
+      <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/watch?v=qU4MOQk8JvY')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,0,0,0.1)', borderRadius: 8, padding: 8, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,0,0,0.3)' }}>
+        <Text style={{ color: '#ff4444', fontSize: 14 }}>🎬 Watch: Alloys & Their Uses</Text>
+      </TouchableOpacity>
       <Text style={styles.paragraph}>
         An <Text style={styles.highlight}>alloy</Text> is a homogeneous mixture of two or more metals, or a metal and a non-metal. Alloying is a very good method of improving the properties of a metal (e.g., increasing strength, resisting corrosion).
       </Text>
@@ -168,6 +243,12 @@ export default function MetalsScreen() {
       <Text style={styles.bulletPoint}>• <Text style={styles.highlight}>Amalgam</Text>: An alloy where one of the metals is mercury.</Text>
       <Text style={styles.bulletPoint}>• <Text style={styles.highlight}>Steel</Text>: Iron with a small amount of Carbon (makes it hard and strong).</Text>
       <Text style={styles.bulletPoint}>• <Text style={styles.highlight}>Stainless Steel</Text>: Iron mixed with Nickel and Chromium (hard and does not rust).</Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.highlight}>Gold Purity (NCERT):</Text> Pure gold is 24 carat, but it is very soft and not suitable for making jewelry. Therefore, it is alloyed with either silver or copper to make it harder. 22 carat gold means 22 parts gold and 2 parts copper or silver.
+      </Text>
+      <Text style={styles.paragraph}>
+        <Text style={styles.highlight}>Properties of Alloys:</Text> The electrical conductivity and melting point of an alloy is less than that of pure metals. For example, solder (Pb + Sn) has a low melting point, making it ideal for welding electrical wires. Alloys are also more resistant to corrosion than pure metals.
+      </Text>
     </DetailScreenLayout>
   );
 }

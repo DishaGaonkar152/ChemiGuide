@@ -1,3 +1,4 @@
+// ChemBot Real-time Chat AI Service
 import { FORMULA_DATABASE } from '../utils/formulaDatabase';
 
 // Groq API Key (Set via setGroqApiKey or EXPO_PUBLIC_GROQ_API_KEY env var)
@@ -7,38 +8,46 @@ export function setGroqApiKey(key: string) {
   GROQ_API_KEY = key.trim();
 }
 
-const SYSTEM_PROMPT = `You are ChemBot 🤖, a friendly AI Chemistry Tutor for high school students (Class 9 & 10).
+const SYSTEM_PROMPT = `You are ChemBot 🤖, a friendly, clear, and interactive AI Chemistry Tutor for high school students (Class 9 & 10 NCERT / CBSE).
 
-Rules:
-- Be enthusiastic! Use emojis like ⚗️🧪🔬💡
-- CRITICAL FORMATTING RULE: Do NOT use markdown bold asterisks (do NOT write **text** or **title**). Answer directly, clearly, and neatly using emojis, bullet points, and plain titles.
-- Keep responses concise (2-3 short paragraphs max) for mobile
-- Explain with real-world analogies
-- Write proper chemical equations when relevant
-- If asked non-chemistry topics, answer briefly but redirect to chemistry
-- End with a fun fact or follow-up question`;
+CRITICAL DIRECTIVES:
+1. ALWAYS SOLVE AND ANSWER IMMEDIATELY:
+   - NEVER ask the student for "more details", "to describe the diagram", or say "Looking forward to your description" or "Here is a guide".
+   - Whatever question or prompt is asked, INSTANTLY provide the complete, accurate solution and explanation right away!
 
-const VISION_SYSTEM_PROMPT = `You are ChemBot Vision AI 🤖, an expert High School Chemistry Tutor (Class 9 & 10, NCERT & International Curriculum) specializing in analyzing, scanning, and solving chemistry images, textbook pages, handwritten notes, chemical reaction diagrams, and formulas.
+2. CONTINUOUS REALTIME CHAT & MEMORY:
+   - Connect naturally with previous messages in the chat history.
 
-CRITICAL FORMATTING RULE: Do NOT use markdown bold asterisks (do NOT write **text** or **title**). Answer directly, clearly, and neatly using emojis, bullet points, and plain titles without double asterisks.
+3. DIRECT, CLEAN & MEMORABLE:
+   - Present the answer in a neat, easy-to-read layout using short paragraphs and bullet points.
+   - ALWAYS include ONE vivid, memorable real-world example or practical analogy that helps the student remember the concept!
 
-When an image is provided, follow this clean structured format:
+4. ALWAYS END WITH A FRIENDLY SUGGESTION:
+   - At the very end of EVERY answer, ask a warm follow-up suggestion (e.g., "Would you like me to show you a practice numerical on this?").
 
-1. 🔍 Image Classification & Source:
-   - Identify the source/type (e.g. NCERT Class 9/10 Textbook Page, Handwritten Study Notes, Exam Question, Chemical Reaction Flowchart, Lab Apparatus Experiment, Digital Screenshot).
-   - Mention the core chemistry topic detected (e.g. Atomic Structure, Acids & Bases, Balancing Equations, Mole Concept, Carbon Compounds).
+Formatting Rules:
+- CRITICAL FORMATTING RULE: Do NOT use markdown bold asterisks (do NOT write **text** or **title**). Answer using clean text, emojis, and bullet points.
+- Include balanced chemical equations with state symbols (s, l, g, aq) ONLY when relevant to the question.`;
 
-2. 📝 Scanned Content & Key Problem:
-   - Transcribe the exact question, equation, or diagram labels visible in the image.
+const VISION_SYSTEM_PROMPT = `You are ChemBot Vision AI, an expert Chemistry image analyzer and tutor. You can SEE and READ images.
 
-3. 🧪 Detailed Step-by-Step Solution & Explanation:
-   - Provide the accurate, step-by-step solution to the problem in the image.
-   - For chemical equations: show the unbalanced reaction, step-by-step atom balancing, and the final balanced equation with physical states (s, l, g, aq).
-   - For diagrams/experiments: explain the setup, key observations (color change, gas evolution, temperature change), and reaction mechanism.
-   - For numericals/mole concept: show given values, formula used, substitution, and final answer with units!
+YOUR #1 JOB: Look at the image carefully, READ every word/symbol/number visible in it, and give a COMPLETE, ACCURATE answer.
 
-4. 💡 NCERT Exam Tip & Key Formula:
-   - Highlight important memory tricks, common student mistakes to avoid in exams, or key formulas to remember.`;
+STEP-BY-STEP PROCESS (follow every time):
+1. DESCRIBE what you see: Is it a textbook page, handwritten notes, a chemical diagram, molecular structure, lab apparatus, periodic table, reaction equation, graph, or a question paper?
+2. READ & EXTRACT: Read ALL text, chemical formulas, numbers, equations, labels, and symbols visible in the image. Write them out.
+3. SOLVE OR EXPLAIN: If it contains a question — solve it with full working. If it is a concept diagram — explain the concept shown. If it is a reaction — balance it, name reactants/products, and classify the reaction type.
+4. Give a MEMORABLE TRICK or shortcut related to the topic.
+5. End with a friendly suggestion: ask if the student wants a practice question, deeper explanation, or related topic!
+
+RULES:
+- NEVER say "I cannot see the image" or "please describe the image" — you CAN see it, so analyze it directly!
+- NEVER ask for more details or say "Looking forward to your description" — answer IMMEDIATELY with what you see.
+- If the image is blurry or unclear, still give your best analysis of what you can identify.
+- Include balanced chemical equations with state symbols (s, l, g, aq) when relevant.
+- CRITICAL FORMATTING: Do NOT use markdown bold asterisks (do NOT write **text**). Use clean text, bullet points, emoji headers, and plain section headers.
+- Keep your answer well-structured and easy to understand for a high school student.`;
+
 
 // Rich Element Database for offline fallback
 const ELEMENTS_DB: Record<string, { symbol: string; name: string; num: number; mass: number; config: string; valence: number; group: number; period: number; cat: string; desc: string }> = {
@@ -63,25 +72,81 @@ function resolveAccurateResponse(userQuery: string): string {
 
   for (const f of FORMULA_DATABASE) {
     if (q.includes(f.name.toLowerCase()) || q.includes(f.formula.toLowerCase()) || q.includes(f.id)) {
-      return `🧪 Chemical Formula Info: ${f.name} (${f.formula})\n\n• Formula: ${f.formula}\n• Category: ${f.type}\n• Mnemonic: ${f.mnemonic}\n• Structure Breakdown: ${f.breakdown}\n• Pro Tip: ${f.trick}\n\n💡 Fun Fact: ${f.name} plays an important role in chemical reactions and industrial processes!`;
+      return `🧪 Chemical Profile: ${f.name} (${f.formula})
+
+• Chemical Formula: ${f.formula}
+• Category: ${f.type}
+
+💡 Memorable Analogy & Mnemonic:
+${f.mnemonic} — ${f.breakdown}
+
+🔬 Key Property:
+${f.trick}
+
+❓ Suggestion: Would you like to see how ${f.name} reacts with other chemicals, or try a practice formula question?`;
     }
   }
 
   for (const [key, el] of Object.entries(ELEMENTS_DB)) {
     if (q.includes(key) || q.includes(`element ${el.symbol.toLowerCase()}`) || q === el.symbol.toLowerCase()) {
-      return `⚛️ Element Profile: ${el.name} (${el.symbol})\n\n• Atomic Number (Z): ${el.num}\n• Atomic Mass: ${el.mass} u\n• Category: ${el.cat}\n• Group & Period: Group ${el.group}, Period ${el.period}\n• Electron Configuration: ${el.config}\n• Valence Electrons: ${el.valence}\n\nOverview: ${el.desc}\n\n💡 Pro Tip: Valency helps determine how ${el.name} forms compounds with other elements!`;
+      return `⚛️ Element Summary: ${el.name} (${el.symbol})
+
+• Atomic Number: ${el.num} | Atomic Mass: ${el.mass} u
+• Category: ${el.cat} (Group ${el.group}, Period ${el.period})
+• Electron Configuration: ${el.config} | Valence Electrons: ${el.valence}
+
+💡 Key Fact to Remember:
+${el.desc} Valency (${el.valence}) determines how ${el.name} forms compounds with other elements!
+
+❓ Suggestion: Would you like to check how ${el.name} bonds with oxygen or hydrogen, or explore its position on the periodic table?`;
     }
   }
 
   if (q.includes('mole') || q.includes('avogadro') || q.includes('molar mass')) {
-    return `🧮 The Mole Concept:\n\n1 Mole is the amount of substance containing exactly 6.022 × 10²³ particles (atoms, molecules, or ions). This is called Avogadro's Number (Nₐ).\n\nKey Formulas:\n• Moles (n) = Mass (g) / Molar Mass (g/mol)\n• Number of Particles = Moles × 6.022 × 10²³\n• Volume of Gas at STP = Moles × 22.4 Litres\n\n💡 Fun Fact: One mole of marbles would cover the entire surface of the Earth to a depth of 50 miles!`;
+    return `🧮 The Mole Concept Made Simple
+
+1 Mole is simply a scientific counting unit for atoms and molecules!
+• 1 Mole = 6.022 × 10²³ particles (Avogadro's Number)
+
+💡 Memorable Example:
+Just like 1 dozen eggs = 12 eggs, 1 mole of water molecules = 6.022 × 10²³ water molecules!
+
+Key Formulas:
+• Moles (n) = Mass (g) / Molar Mass (g/mol)
+• Moles (n) = Number of Particles / 6.022 × 10²³
+• Volume of Gas at STP = Moles × 22.4 Litres
+
+❓ Suggestion: Would you like to try a quick step-by-step mole concept calculation together?`;
   }
 
   if (q.includes('acid') || q.includes('base') || q.includes('ph')) {
-    return `🧪 Acids, Bases & pH Scale:\n\n• Acids: Release H⁺ ions in water. Taste sour. Turn blue litmus RED. pH < 7.\n• Bases: Release OH⁻ ions in water. Taste bitter. Turn red litmus BLUE. pH > 7.\n• Neutralization: Acid + Base → Salt + Water (e.g., HCl + NaOH → NaCl + H₂O).\n\n💡 Fun Fact: Universal Indicator displays a rainbow of colours across the 0-14 pH spectrum!`;
+    return `🧪 Acids, Bases & pH Scale
+
+• Acids: Release H⁺ ions in water, taste sour, turn blue litmus RED (pH < 7).
+• Bases: Release OH⁻ ions in water, taste bitter/soapy, turn red litmus BLUE (pH > 7).
+
+💡 Memorable Example:
+Lemon juice is an acid (pH ~ 2), while soap or baking soda solution is a base (pH ~ 9)!
+
+Neutralization Reaction:
+Acid + Base → Salt + Water
+Example: HCl(aq) + NaOH(aq) → NaCl(aq) + H₂O(l)
+
+❓ Suggestion: Would you like to see how indicators like phenolphthalein work, or solve a neutralization reaction problem?`;
   }
 
-  return `🤖 ChemBot AI Assistant:\n\nGreat question! "${userQuery}" relates to chemical science.\n\nTo activate 100% live Groq AI streaming responses, please paste your free Groq API key (starts with gsk_...) from https://console.groq.com/keys !\n\nIn the meantime, feel free to ask about:\n• ⚛️ Atomic structure & electron configuration\n• 🧪 Acids, Bases & pH scale\n• ⚗️ Chemical equation balancing\n• 💎 Reactivity series & Metals\n• 🧮 Mole concept & Avogadro's number`;
+  return `🤖 ChemBot AI Assistant:
+
+Great question! "${userQuery}" is a key topic in chemistry.
+
+Feel free to ask about:
+• ⚛️ Atomic structure & valence electrons
+• 🧪 Acids, Bases & pH scale
+• ⚗️ Chemical equation balancing
+• 💎 Reactivity series & Metals
+• 🧮 Mole concept calculations
+
+❓ Suggestion: Which of these topics would you like us to talk about first?`;
 }
 
 export interface ChatMessage {
@@ -90,15 +155,28 @@ export interface ChatMessage {
   imageUrl?: string;
 }
 
-export async function sendChatMessage(userMessage: string, imageBase64DataUri?: string): Promise<string> {
+export async function sendChatMessage(
+  userMessage: string,
+  imageBase64DataUri?: string,
+  historyMessages: ChatMessage[] = []
+): Promise<string> {
   const isVision = !!imageBase64DataUri;
   const sysPrompt = isVision ? VISION_SYSTEM_PROMPT : SYSTEM_PROMPT;
 
   // 1. Try Groq API if key is present
   if (GROQ_API_KEY && GROQ_API_KEY.startsWith('gsk_')) {
-    const visionModels = ['llama-3.2-90b-vision-preview', 'llama-3.2-11b-vision-instruct'];
-    const textModels = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
+    const visionModels = ['qwen/qwen3.8-27b', 'qwen/qwen3.6-27b'];
+    const textModels = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3.8-27b', 'qwen/qwen3.6-27b', 'groq/compound', 'groq/compound-mini'];
     const modelsToTry = isVision ? visionModels : textModels;
+
+    // Filter out placeholder history messages so AI never mimics old meta responses
+    const formattedHistory = historyMessages
+      .slice(-6)
+      .filter(msg => !msg.text.includes('Looking forward to your description') && !msg.text.includes('quick-reference guide'))
+      .map(msg => ({
+        role: msg.role === 'user' ? 'user' : 'assistant',
+        content: msg.text.replace(/\*\*/g, ''),
+      }));
 
     for (const model of modelsToTry) {
       try {
@@ -107,7 +185,7 @@ export async function sendChatMessage(userMessage: string, imageBase64DataUri?: 
           userContent = [
             {
               type: 'text',
-              text: userMessage.trim() || 'Please analyze this chemistry image, textbook page, diagram, or formula problem in detail. Identify the image type, scan the content, and give a complete step-by-step accurate answer directly without markdown asterisks.',
+              text: userMessage.trim() || 'Look at this chemistry image carefully. Read ALL text, formulas, equations, and labels visible in the image. Then: (1) Describe what type of image this is, (2) Extract and write out everything you can read from it, (3) Solve any questions or explain the concept shown with step-by-step working, (4) Give a memory trick, (5) Suggest what to explore next.',
             },
             {
               type: 'image_url',
@@ -118,6 +196,12 @@ export async function sendChatMessage(userMessage: string, imageBase64DataUri?: 
           userContent = userMessage;
         }
 
+        const messagesForApi = [
+          { role: 'system', content: sysPrompt },
+          ...formattedHistory,
+          { role: 'user', content: userContent },
+        ];
+
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
           headers: {
@@ -126,12 +210,9 @@ export async function sendChatMessage(userMessage: string, imageBase64DataUri?: 
           },
           body: JSON.stringify({
             model: model,
-            messages: [
-              { role: 'system', content: sysPrompt },
-              { role: 'user', content: userContent },
-            ],
-            max_tokens: 1000,
-            temperature: 0.5,
+            messages: messagesForApi,
+            max_tokens: isVision ? 3500 : 2500,
+            temperature: isVision ? 0.6 : 0.5,
           }),
         });
 
@@ -418,56 +499,57 @@ function findOfflineReaction(chemicals: string[]): ReactionResult | null {
 export async function predictReaction(chemicals: string[]): Promise<ReactionResult> {
   // 1. Try Groq AI
   if (GROQ_API_KEY && GROQ_API_KEY.startsWith('gsk_')) {
-    try {
-      const chemList = chemicals.join(' + ');
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${GROQ_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
-          messages: [
-            { role: 'system', content: REACTION_PREDICT_PROMPT },
-            { role: 'user', content: `Predict what happens when these chemicals are mixed: ${chemList}` },
-          ],
-          max_tokens: 800,
-          temperature: 0.3,
-        }),
-      });
+    const modelsToTry = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3.8-27b', 'qwen/qwen3.6-27b', 'groq/compound', 'groq/compound-mini'];
+    const chemList = chemicals.join(' + ');
 
-      if (response.ok) {
-        const data = await response.json();
-        const content = data?.choices?.[0]?.message?.content;
-        if (content) {
-          try {
-            // Clean the response — strip markdown code blocks if present
-            let cleaned = content.trim();
-            if (cleaned.startsWith('```')) {
-              cleaned = cleaned.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
-            }
-            const parsed = JSON.parse(cleaned) as ReactionResult;
-            // Validate required fields
-            if (parsed.equation && parsed.reactionType && parsed.explanation) {
-              // Add emoji prefixes to observations if missing
-              if (parsed.observations) {
-                parsed.observations = parsed.observations.map(obs => {
-                  if (!/^[🔥💨🎨⬇️⚡🌡️🐌💥✨☁️🧪💛🎵💧🧂🎈⚪🟤]/.test(obs)) {
-                    return '🔬 ' + obs;
-                  }
-                  return obs;
-                });
+    for (const model of modelsToTry) {
+      try {
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${GROQ_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: [
+              { role: 'system', content: REACTION_PREDICT_PROMPT },
+              { role: 'user', content: `Predict what happens when these chemicals are mixed: ${chemList}` },
+            ],
+            max_tokens: 2000,
+            temperature: 0.3,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const content = data?.choices?.[0]?.message?.content;
+          if (content) {
+            try {
+              let cleaned = content.trim();
+              if (cleaned.startsWith('```')) {
+                cleaned = cleaned.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
               }
-              return parsed;
+              const parsed = JSON.parse(cleaned) as ReactionResult;
+              if (parsed.equation && parsed.reactionType && parsed.explanation) {
+                if (parsed.observations) {
+                  parsed.observations = parsed.observations.map(obs => {
+                    if (!/^[🔥💨🎨⬇️⚡🌡️🐌💥✨☁️🧪💛🎵💧🧂🎈⚪🟤]/.test(obs)) {
+                      return '🔬 ' + obs;
+                    }
+                    return obs;
+                  });
+                }
+                return parsed;
+              }
+            } catch (parseErr) {
+              console.warn('Failed to parse AI reaction JSON:', parseErr);
             }
-          } catch (parseErr) {
-            console.warn('Failed to parse AI reaction JSON:', parseErr);
           }
         }
+      } catch (error) {
+        console.warn(`Groq API reaction prediction (${model}) failed:`, error);
       }
-    } catch (error) {
-      console.warn('Groq API reaction prediction failed:', error);
     }
   }
 
