@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, useWindowDimensions } from 'react-native';
 import NeonCard from '../../components/NeonCard';
-
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const TOPICS = [
   {
@@ -38,11 +36,13 @@ const TOPICS = [
 ];
 
 export default function Class9Screen() {
+  const { height: windowHeight } = useWindowDimensions();
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.content}>
         {/* ─── HERO HEADER ─── */}
-        <View style={styles.heroSection}>
+        <View style={[styles.heroSection, { minHeight: windowHeight * 0.55 }]}>
           <View style={styles.glassHeader}>
             <Text style={styles.classLabel}>CLASS 9</Text>
             <Text style={styles.title}>Chemistry Topics</Text>
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
   },
   heroSection: {
-    minHeight: SCREEN_HEIGHT * 0.55,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',

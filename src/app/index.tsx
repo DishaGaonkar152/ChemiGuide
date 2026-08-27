@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   Switch,
+  useWindowDimensions,
 } from "react-native";
 import { useAppTheme } from '../context/ThemeContext';
 import Animated, {
@@ -245,6 +246,7 @@ function BoredButton() {
 // ═══════════════════════════════════════
 export default function Home() {
   const { theme, toggleTheme } = useAppTheme();
+  const { height: windowHeight } = useWindowDimensions();
 
   return (
     <View style={styles.container}>
@@ -264,7 +266,7 @@ export default function Home() {
         contentContainerStyle={styles.content}
       >
         {/* ═══ FULL SCREEN HERO ═══ */}
-        <View style={styles.heroSection}>
+        <View style={[styles.heroSection, { minHeight: windowHeight }]}>
           <FloatingEmojis />
           <ZoomText text="CHEMI GUIDE" subtitle="Your Gateway to Chemistry" />
         </View>
@@ -280,7 +282,7 @@ export default function Home() {
         <MotivationalSection />
 
         {/* ═══ PERIODIC TABLE ═══ */}
-        <View style={styles.fullSection}>
+        <View style={[styles.fullSection, { minHeight: windowHeight }]}>
           <View style={styles.glassSection}>
             <Text style={styles.sectionEmoji}>⚛</Text>
             <Text style={styles.sectionTitle}>Interactive Periodic Table</Text>
@@ -292,7 +294,7 @@ export default function Home() {
         </View>
 
         {/* ═══ CLASS SELECTION ═══ */}
-        <View style={styles.fullSection}>
+        <View style={[styles.fullSection, { minHeight: windowHeight }]}>
           <Text style={styles.sectionEmoji}>📚</Text>
           <Text style={styles.sectionTitle}>Choose Your Class</Text>
           <Text style={styles.sectionSubtitle}>
@@ -346,7 +348,6 @@ const styles = StyleSheet.create({
 
   // ═══ HERO ═══
   heroSection: {
-    minHeight: SCREEN_HEIGHT,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
@@ -460,7 +461,6 @@ const styles = StyleSheet.create({
 
   // ═══ FULL SECTION ═══
   fullSection: {
-    minHeight: SCREEN_HEIGHT,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",

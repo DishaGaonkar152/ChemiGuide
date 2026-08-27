@@ -1,26 +1,24 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, useWindowDimensions } from 'react-native';
 import NeonCard from '../../components/NeonCard';
-
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const TOPICS = [
   {
-    title: '⚡ Chemical Reactions & Equations',
-    description: 'Understand how substances transform and how to balance chemical equations.',
+    title: '⚗ Chemical Reactions & Equations',
+    description: 'Learn how elements interact, balance equations, and understand different types of reactions.',
     color: '#00ffff',
     href: '/class10/reactions'
   },
   {
-    title: '🧫 Acids, Bases & Salts',
-    description: 'Explore the pH scale, properties of acids and bases, and salt formations.',
+    title: '💧 Acids, Bases & Salts',
+    description: 'Discover the pH scale, indicators, and the chemistry behind everyday substances.',
     color: '#ff00ff',
     href: '/class10/acids-bases'
   },
   {
-    title: '⛏ Metals & Non-Metals',
-    description: 'Learn physical and chemical properties, reactivity series, and extraction of metals.',
-    color: '#00ff00',
+    title: '⚒ Metals & Non-Metals',
+    description: 'Explore the properties, reactivity series, and metallurgy of elements.',
+    color: '#00ff44',
     href: '/class10/metals'
   },
   {
@@ -38,11 +36,13 @@ const TOPICS = [
 ];
 
 export default function Class10Screen() {
+  const { height: windowHeight } = useWindowDimensions();
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.content}>
         {/* ─── HERO HEADER ─── */}
-        <View style={styles.heroSection}>
+        <View style={[styles.heroSection, { minHeight: windowHeight * 0.55 }]}>
           <View style={styles.glassHeader}>
             <Text style={styles.classLabel}>CLASS 10</Text>
             <Text style={styles.title}>Chemistry Topics</Text>
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
   },
   heroSection: {
-    minHeight: SCREEN_HEIGHT * 0.55,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',

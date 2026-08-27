@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, useWindowDimensions } from 'react-native';
 import TopicActivities from './TopicActivities';
-
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 interface DetailScreenLayoutProps {
   title: string;
@@ -12,11 +10,13 @@ interface DetailScreenLayoutProps {
 }
 
 export default function DetailScreenLayout({ title, children, color = '#00ffff', emoji }: DetailScreenLayoutProps) {
+  const { height: windowHeight } = useWindowDimensions();
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.content}>
         {/* ─── FULL-SCREEN TITLE HERO ─── */}
-        <View style={styles.heroSection}>
+        <View style={[styles.heroSection, { minHeight: windowHeight * 0.55 }]}>
           <View style={[styles.heroGlass, { borderColor: color, shadowColor: color }]}>
             {emoji && <Text style={styles.heroEmoji}>{emoji}</Text>}
             <Text style={[styles.heroTitle, { color, textShadowColor: color }]}>{title}</Text>
@@ -56,7 +56,6 @@ export const styles = StyleSheet.create({
 
   // ─── HERO ───
   heroSection: {
-    minHeight: SCREEN_HEIGHT * 0.55,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
